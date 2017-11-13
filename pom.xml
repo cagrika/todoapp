@@ -17,6 +17,8 @@
 
     <properties>
         <java-version>1.8</java-version>
+        <sonar.analysis.mode>preview</sonar.analysis.mode>
+        <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
     </properties>
 
     <dependencies>
@@ -112,6 +114,30 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.3.0.603</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.5.201505241946</version>
+                <configuration>
+                    <destfile>${project.artifactId}/target/jacoco.exec</destfile>
+                    <datafile>${project.artifactId}/target/jacoco.exec</datafile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

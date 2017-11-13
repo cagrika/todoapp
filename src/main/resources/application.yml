@@ -5,8 +5,7 @@ management:
   port: 8081
 couchbase:
     hosts:
-      - 127.0.0.1
-      - localhost
+      - db
     bucket: ToDo
     password: Dbhsj2098
 server:
