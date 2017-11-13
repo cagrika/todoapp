@@ -1,0 +1,20 @@
+management:
+  security:
+    enabled: false
+    roles: SUPERUSER
+  port: 8081
+couchbase:
+    hosts:
+      - 127.0.0.1
+      - localhost
+    bucket: ToDo
+    password: Dbhsj2098
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+spring:
+  data:
+    couchbase:
+      auto-index: true
