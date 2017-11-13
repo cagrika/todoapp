@@ -4,7 +4,6 @@ import com.data212.todo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @RequiredArgsConstructor
 public class CouchbaseUserDetailsService implements UserDetailsService {
@@ -12,7 +11,7 @@ public class CouchbaseUserDetailsService implements UserDetailsService {
     private final UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String name) {
         User document = userService.findByName(name);
         if(document!=null) {
             String username = document.getName();

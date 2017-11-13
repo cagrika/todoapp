@@ -1,5 +1,6 @@
 package com.data212.todo.controller;
 
+import com.data212.todo.advice.ToDoException;
 import com.data212.todo.model.User;
 import com.data212.todo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(value ="/register", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute User user) throws Exception {
+    public String registerUser(@ModelAttribute User user) throws ToDoException {
         userService.register(user);
         log.debug("Registered user : {}", user.getId());
         return "/login";

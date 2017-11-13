@@ -1,5 +1,6 @@
 package com.data212.todo.service;
 
+import com.data212.todo.advice.ToDoException;
 import com.data212.todo.model.Task;
 import com.data212.todo.model.User;
 import com.data212.todo.model.enums.TaskStatus;
@@ -24,12 +25,12 @@ public class UserService {
     private final MapperFacade mapperFacade;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserDocument register(User user) throws Exception {
+    public UserDocument register(User user) throws ToDoException {
         log.debug("Registering new user with id : {}", user.getId());
         if(user.getEmail().equalsIgnoreCase("") ||
                 user.getName().equalsIgnoreCase("") ||
                 user.getPassword().length()<6){
-            throw new Exception("Invalid user option");
+            throw new ToDoException("Invalid user option");
         }
         UserDocument userDocument = mapperFacade.map(user, UserDocument.class);
         String encodedPass = bCryptPasswordEncoder.encode(user.getPassword());

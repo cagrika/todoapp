@@ -18,27 +18,30 @@ public class TaskController {
 
     private final UserService userService;
 
+    private static String taskList = "tasklist";
+    private static String userPage = "/user";
+
     @RequestMapping(value = "/task", method = RequestMethod.POST)
     @ApiOperation(value = "Add task for user")
     public String addTask(Principal principal, Model model, Task task){
         userService.addTask(principal.getName(), task);
-        model.addAttribute("tasklist", userService.userTasks(principal.getName()));
-        return "/user";
+        model.addAttribute(taskList, userService.userTasks(principal.getName()));
+        return userPage;
     }
 
     @RequestMapping(value = "/task", method = RequestMethod.DELETE)
     @ApiOperation(value = "Delete task from user")
     public String deleteTask(Principal principal, Model model, @ModelAttribute Task task){
         userService.deleteTask(principal.getName(), task.getId());
-        model.addAttribute("tasklist", userService.userTasks(principal.getName()));
-        return "/user";
+        model.addAttribute(taskList, userService.userTasks(principal.getName()));
+        return userPage;
     }
 
     @RequestMapping(value = "/task", method = RequestMethod.PUT)
     @ApiOperation(value = "Update task of user")
     public String updateTask(Principal principal, Model model, @ModelAttribute Task task){
         userService.updateTask(principal.getName(), task.getId(), task.getName());
-        model.addAttribute("tasklist", userService.userTasks(principal.getName()));
-        return "/user";
+        model.addAttribute(taskList, userService.userTasks(principal.getName()));
+        return userPage;
     }
 }

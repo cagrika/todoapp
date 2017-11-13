@@ -40,7 +40,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldListUserTasksForGivenUsername() throws Exception {
+    public void it_should_list_taks_for_given_username() throws Exception {
         UserDocument userDocument = new UserDocument();
         TaskDocument taskDocument1 = new TaskDocument();
         taskDocument1.setStatus(TaskStatus.ACTIVE);
@@ -60,11 +60,11 @@ public class UserServiceTest {
         taskDocumentList.add(taskDocument3);
         userDocument.setTaskList(taskDocumentList);
         Mockito.when(userRepository.findByName("cagrika")).thenReturn(userDocument);
-        assertThat(userService.userTasks("cagrika").size()).isEqualTo(3);
+        assertThat(userService.userTasks("cagrika")).isEqualTo(taskDocumentList);
     }
 
     @Test
-    public void shouldSortTasksByDate() throws Exception {
+    public void it_should_sort_tasks_by_date() throws Exception {
         UserDocument userDocument = new UserDocument();
         TaskDocument taskDocument1 = new TaskDocument();
         taskDocument1.setStatus(TaskStatus.ACTIVE);
@@ -90,7 +90,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldAddTask(){
+    public void it_should_add_task(){
         Task task = new Task();
         task.setName("New Task");
         task.setDate(new Date());
@@ -104,12 +104,12 @@ public class UserServiceTest {
         Mockito.when(mapperFacade.map(task,TaskDocument.class)).thenReturn(taskDocument);
         Mockito.when(userRepository.findByName("cagrika")).thenReturn(userDocument);
         Mockito.when(userRepository.save(userDocument)).thenReturn(userDocument);
-        assertThat(userService.addTask("cagrika",task).getTaskList().get(0).getName()
-                .equalsIgnoreCase(taskDocument.getName()));
+        assertThat(userService.addTask("cagrika",task).getTaskList().get(0).getName())
+                .isEqualToIgnoringCase(taskDocument.getName());
     }
 
     @Test(expected = Exception.class)
-    public void shouldThrowExceptionWhenAddingTaskIfUserNotFound(){
+    public void it_should_throw_exception_when_adding_task_if_username_not_found(){
         Task task = new Task();
         task.setName("New Task");
         task.setDate(new Date());
@@ -124,7 +124,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldRegister() throws Exception{
+    public void it_should_register() throws Exception{
         User user = new User();
         user.setName("cagrika");
         user.setEmail("cagrika@cagrika.com");
@@ -138,11 +138,11 @@ public class UserServiceTest {
         Mockito.when(bCryptPasswordEncoder.encode("1234567")).thenReturn("7654321");
         Mockito.when(mapperFacade.map(user, UserDocument.class)).thenReturn(userDocument);
         Mockito.when(userRepository.save(Mockito.any(UserDocument.class))).thenReturn(userDocument);
-        assertThat(userService.register(user).equals(userDocument));
+        assertThat(userService.register(user)).isEqualTo(userDocument);
     }
 
     @Test(expected = Exception.class)
-    public void shouldThrowExceptionWhenRegisteringWithPasswordLessThan6Characters() throws Exception{
+    public void it_should_throw_exception_when_registering_with_password_less_than_6_characters() throws Exception{
         User user = new User();
         user.setName("cagrika");
         user.setEmail("cagrika@cagrika.com");
