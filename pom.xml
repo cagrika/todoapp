@@ -17,8 +17,13 @@
 
     <properties>
         <java-version>1.8</java-version>
-        <sonar.analysis.mode>preview</sonar.analysis.mode>
-        <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
+        <sonar.sources>src/main</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
+        <runSuite>**/*Suite.class</runSuite>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
     </properties>
 
     <dependencies>
@@ -118,11 +123,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.5.201505241946</version>
-                <configuration>
-                    <destfile>${project.artifactId}/target/jacoco.exec</destfile>
-                    <datafile>${project.artifactId}/target/jacoco.exec</datafile>
-                </configuration>
+                <version>0.7.6.201602180812</version>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>

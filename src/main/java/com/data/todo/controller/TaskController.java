@@ -19,7 +19,7 @@ public class TaskController {
     private final UserService userService;
 
     private static String taskList = "tasklist";
-    private static String userPage = "/user";
+    private static String userPage = "user";
 
     @RequestMapping(value = "/task", method = RequestMethod.POST)
     @ApiOperation(value = "Add task for user")

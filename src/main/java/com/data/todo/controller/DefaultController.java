@@ -17,21 +17,21 @@ public class DefaultController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
-        return "/register";
+        return "register";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "/login";
+        return "login";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root(Principal principal, Model model) {
         if(principal == null){
-            return "/login";
+            return "login";
         }
         model.addAttribute("tasklist", userService.userTasks(principal.getName()));
-        return "/user";
+        return "user";
     }
 
 }

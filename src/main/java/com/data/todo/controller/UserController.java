@@ -21,14 +21,14 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Principal principal, Model model) {
         model.addAttribute("tasklist", userService.userTasks(principal.getName()));
-        return "/user";
+        return "user";
     }
 
     @RequestMapping(value ="/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute User user) throws ToDoException {
         userService.register(user);
         log.debug("Registered user : {}", user.getId());
-        return "/login";
+        return "login";
     }
 
 
