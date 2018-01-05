@@ -4,3 +4,4 @@ node("todoapp") {
     stage('checkout') {
         checkout scm
     }
+} 
