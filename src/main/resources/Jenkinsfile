@@ -1,7 +1,7 @@
-
-
+node('master') {
     def mvnHome = tool "M3"
     stage('checkout') {
         checkout scm
     }
+}
 
